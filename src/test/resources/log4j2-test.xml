@@ -15,21 +15,13 @@
 ~ See the license for the specific language governing permissions and
 ~ limitations under the license.
 -->
-<Configuration status="ERROR">
-    <Properties>
-        <Property name="LOG_DIR">${env:JENKINS_HOME:-.}/logs</Property>
-    </Properties>
-    <Appenders>
-        <RollingRandomAccessFile name="audit" fileName="${LOG_DIR}/audit.log" filePattern="${LOG_DIR}/archive/audit.log.%d{yyyyMMdd_HHmmss}-%i">
-            <JsonLayout properties="true"/>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="20 MB"/>
-            </Policies>
-        </RollingRandomAccessFile>
-    </Appenders>
-    <Loggers>
-        <Logger name="AuditLogger" level="trace" additivity="false">
-            <AppenderRef ref="audit"/>
-        </Logger>
-    </Loggers>
+<Configuration>
+  <Appenders>
+    <List name="AuditList"/>
+  </Appenders>
+  <Loggers>
+    <Logger name="AuditLogger" level="debug">
+      <AppenderRef ref="AuditList"/>
+    </Logger>
+  </Loggers>
 </Configuration>
